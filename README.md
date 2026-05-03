@@ -30,7 +30,7 @@ The platform is designed to break down the overwhelming process of voting into m
 *   **Live Vercel deployment** available at `https://vote-smart-ai-seven.vercel.app`.
 *   **Gemini demo fallback** when `VITE_GEMINI_API_KEY` is not provided, with a friendly notice shown in the chat.
 
-## 🔒 Security & Quality Improvements (Latest)
+## 🔒 Security & Quality Improvements 
 *   **Input validation & sanitization** across all forms and chatbot inputs to prevent XSS attacks.
 *   **Rate limiting** on chatbot API calls to prevent abuse (10 requests per minute).
 *   **Error boundary components** for graceful error handling and user recovery.

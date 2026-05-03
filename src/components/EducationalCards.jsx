@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BookOpen, FileText, CheckSquare, Shield } from 'lucide-react';
+import { BookOpen, CheckSquare, ExternalLink, FileText, Landmark, SearchCheck, Shield } from 'lucide-react';
 
 const EducationalCards = ({ t }) => {
   const cards = [
@@ -31,6 +31,32 @@ const EducationalCards = ({ t }) => {
       color: "bg-amber-50 dark:bg-amber-900/20",
       link: "https://www.eci.gov.in/faqs/evm-vvpat-faqs/"
     }
+  ];
+  const officialResources = [
+    {
+      label: 'Voter Portal',
+      desc: 'Register, update details, and track voter services.',
+      href: 'https://voters.eci.gov.in/',
+      icon: <Landmark size={18} />,
+    },
+    {
+      label: 'ECI Website',
+      desc: 'Official Election Commission updates and forms.',
+      href: 'https://www.eci.gov.in/',
+      icon: <Shield size={18} />,
+    },
+    {
+      label: 'SVEEP',
+      desc: 'Voter education and participation resources.',
+      href: 'https://ecisveep.nic.in/',
+      icon: <BookOpen size={18} />,
+    },
+    {
+      label: 'Voter FAQs',
+      desc: 'Quick answers from official voter help pages.',
+      href: 'https://voters.eci.gov.in/faq',
+      icon: <SearchCheck size={18} />,
+    },
   ];
 
   return (
@@ -77,6 +103,41 @@ const EducationalCards = ({ t }) => {
               </motion.div>
             </a>
           ))}
+        </div>
+
+        <div className="mt-12 rounded-lg border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900">
+          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-[var(--primary)] dark:text-blue-300">
+                Official civic resources
+              </p>
+              <h3 className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">
+                Continue on trusted government services
+              </h3>
+            </div>
+            <p className="max-w-xl text-sm text-slate-600 dark:text-slate-400">
+              Use these official links when you are ready to register, verify details, or read source guidance.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {officialResources.map((resource) => (
+              <a
+                key={resource.label}
+                href={resource.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-950 dark:hover:border-blue-500 dark:hover:bg-blue-950/40"
+              >
+                <div className="mb-3 flex items-center justify-between text-[var(--primary)] dark:text-blue-300">
+                  {resource.icon}
+                  <ExternalLink size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </div>
+                <h4 className="font-semibold text-slate-900 dark:text-white">{resource.label}</h4>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{resource.desc}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

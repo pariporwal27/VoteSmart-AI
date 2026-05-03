@@ -1,5 +1,26 @@
 import { motion } from 'framer-motion';
-import { CalendarDays, AlertCircle } from 'lucide-react';
+import { AlertCircle, CalendarDays, CalendarPlus } from 'lucide-react';
+
+const calendarDates = [
+  { start: '20261015T090000', end: '20261015T093000' },
+  { start: '20261110T090000', end: '20261110T093000' },
+  { start: '20261125T090000', end: '20261125T093000' },
+  { start: '20261205T070000', end: '20261205T180000' },
+  { start: '20261208T090000', end: '20261208T093000' },
+];
+
+const getGoogleCalendarUrl = (event, index) => {
+  const dates = calendarDates[index] || calendarDates[0];
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: `VoteSmart AI: ${event.title}`,
+    dates: `${dates.start}/${dates.end}`,
+    details: `${event.desc} Added from VoteSmart AI.`,
+    location: 'India',
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+};
 
 const Timeline = ({ t }) => {
   const events = t.timeline.events;
@@ -74,6 +95,15 @@ const Timeline = ({ t }) => {
                         </a>
                       )}
                     </p>
+                    <a
+                      href={getGoogleCalendarUrl(event, index)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-700"
+                    >
+                      <CalendarPlus size={16} />
+                      Add to Google Calendar
+                    </a>
                   </div>
                 </div>
               </motion.div>

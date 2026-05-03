@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle, ExternalLink, MapPin, Navigation, Search } from 'lucide-react';
+import { AlertCircle, ExternalLink, Globe2, MapPin, Navigation, Search } from 'lucide-react';
 import { sanitizeInput, validateCity } from '../utils/security';
 
 const copy = {
@@ -20,6 +20,7 @@ const copy = {
     showingOnMap: 'Showing on map',
     openMaps: 'Open in Google Maps',
     openDirections: 'Open directions in Google Maps',
+    verifySearch: 'Verify on Google Search',
     genericError: 'Error searching. Please try again.',
   },
   hi: {
@@ -38,6 +39,7 @@ const copy = {
     showingOnMap: 'Showing on map',
     openMaps: 'Open in Google Maps',
     openDirections: 'Open directions in Google Maps',
+    verifySearch: 'Verify on Google Search',
     genericError: 'Error searching. Please try again.',
   },
 };
@@ -195,6 +197,15 @@ const PollingBoothFinder = ({ language }) => {
                       >
                         <ExternalLink size={16} />
                         {labels.openMaps}
+                      </a>
+                      <a
+                        href={`https://www.google.com/search?q=${mapQuery}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-800"
+                      >
+                        <Globe2 size={16} />
+                        {labels.verifySearch}
                       </a>
                     </div>
                   </motion.div>

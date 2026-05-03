@@ -1,75 +1,108 @@
-# VoteSmart AI 🗳️
+# VoteSmart AI
 
-An intelligent, AI-powered election guidance platform designed to simplify complex election procedures, deadlines, and requirements for citizens. Built for a seamless and responsive hackathon experience.
+An intelligent, AI-powered election guidance platform that helps citizens understand voter registration, deadlines, polling booth lookup, documents, and election-day preparation. The app is built as a responsive civic-tech experience with AI assistance, Google service integrations, accessibility improvements, and production deployment on Vercel.
 
-## � Live Demo
-**Visit the deployed app:** https://vote-smart-ai-seven.vercel.app
+## Live Demo
 
-## �🎯 Chosen Vertical
-**Civic Technology & AI Assistance**
-Our chosen vertical focuses on empowering citizens with accessible, unbiased, and personalized election information using modern web architecture and generative AI.
+**Production app:** https://vote-smart-ai-seven.vercel.app
 
-## 🧠 Approach and Logic
-The platform is designed to break down the overwhelming process of voting into manageable, actionable steps. Our approach relies on two core pillars:
-1. **Dynamic Contextualization**: Instead of providing users with a generic wall of text, the **Personalized Roadmap** uses logical branching to generate a custom timeline and checklist based on the user's specific age, state, and current registration status.
-2. **Conversational Intelligence**: We recognize that citizens have highly specific edge-case questions. Rather than building an exhaustive FAQ, we integrated Google's Generative AI to provide real-time, contextually aware answers in a friendly, conversational format.
+## Chosen Vertical
 
-## 🚀 How the Solution Works
-*   **Hero & Educational Hub**: Instantly hooks the user with high-performance Framer Motion animations and provides simplified cards explaining voter rights and privacy.
-*   **Personalized Roadmap Generator**: Users input their demographic context, and the React state engine maps their inputs to a dynamically rendered, interactive checklist. Users can physically check off tasks as they complete them.
-*   **Interactive Election Timeline**: A responsive UI element that visualizes critical approaching deadlines to prevent voter drop-off.
-*   **VoteSmart Assistant (Gemini AI)**: A fully functional chatbot connected to the **Google Gemini API (`gemini-2.5-flash`)**. It utilizes a strict system instruction prompt to ensure all responses are completely unbiased, avoid political jargon, and strictly serve as a civic guide.
+**Civic Technology and AI Assistance**
 
-## ✨ Latest Features
-*   **Hindi / English language toggle** across the entire UI and chatbot.
-*   **Microphone voice input** in the chatbot for hands-free question entry.
-*   **BLO helpline call button** added to the chat assistant section for quick support.
-*   **Form 6 download link** added directly to the election timeline registration deadline step.
-*   **Form 6 access in the Personalized Roadmap** registration step for easy voter onboarding.
-*   **Polling Booth Finder** - Search and locate nearby polling booths by city.
-*   **Google Maps booth preview** - Select any found booth to view its map location and open directions in Google Maps.
-*   **Dark mode toggle** with improved contrast for forms, cards, navigation, and section backgrounds.
-*   **Loading skeleton screens** for lazy-loaded sections to keep the app feeling responsive.
-*   **Google Analytics 4 support** through `VITE_GA_MEASUREMENT_ID`.
-*   **Keyboard shortcuts help modal** available from the navbar or by pressing `?`.
-*   **PWA manifest and SEO meta tags** for better installability and sharing.
-*   **Skip-to-content link** for keyboard and screen-reader accessibility.
-*   **Feedback email button** for quick support contact.
-*   **Live Vercel deployment** available at `https://vote-smart-ai-seven.vercel.app`.
-*   **Gemini demo fallback** when `VITE_GEMINI_API_KEY` is not provided, with a friendly notice shown in the chat.
+VoteSmart AI focuses on making election information clearer, faster, and more accessible. It combines structured civic workflows with conversational AI so users can move from confusion to action without reading dense government pages first.
 
-## 🔒 Security & Quality Improvements 
-*   **Input validation & sanitization** across all forms and chatbot inputs to prevent XSS attacks.
-*   **Rate limiting** on chatbot API calls to prevent abuse (10 requests per minute).
-*   **Error boundary components** for graceful error handling and user recovery.
-*   **Network error detection** with retry suggestions for offline scenarios.
-*   **Test suite added** with Vitest + React Testing Library for components and utilities.
-*   **Improved accessibility** with ARIA labels, screen reader announcements, and focus management.
-*   **Error logging utility** for debugging and monitoring (ready for Sentry integration).
+## Approach
 
-## 🛠️ Google Services Integration
-**Google Generative AI (Gemini)** is the core intelligence driving the VoteSmart Assistant.
-*   **Implementation**: We utilize the `@google/generative-ai` SDK to establish a chat session.
-*   **Optimization**: We leverage the Gemini Flash model for sub-second response latency, ensuring the bot feels like a live, snappy assistant. The AI maintains conversation history context, allowing for natural follow-up questions from the user.
-*   **Google Maps**: Polling booth search results include an embedded Google Maps preview and direct links for opening the selected booth in Google Maps.
-*   **Google Analytics**: Optional GA4 tracking can be enabled by setting `VITE_GA_MEASUREMENT_ID`.
+The product is designed around three ideas:
 
-## ⚙️ Assumptions Made
-1.  **Connectivity**: The solution assumes the user has a stable internet connection to communicate with the Gemini LLM.
-2.  **API Keys**: It is assumed that reviewers testing the code locally will inject their own `VITE_GEMINI_API_KEY` into the local `.env` file to activate the live AI.
-3.  **Modern Browsers**: The CSS glassmorphism and Framer Motion animations assume the user is on a relatively modern web browser.
+1. **Personalized guidance:** The roadmap generator uses the user's age, city, and voter status to create a practical checklist.
+2. **Conversational support:** The Gemini-powered assistant answers election questions in simple, neutral language.
+3. **Actionable integrations:** Google Maps, Google Calendar, Google Search, and optional Google Analytics make the app more useful beyond static information.
 
-## 💻 Tech Stack
-*   **Frontend**: React (Vite), Tailwind CSS v4
-*   **Animations**: Framer Motion
-*   **Icons**: Lucide React
-*   **AI Backend**: Google Gemini API
-*   **Maps**: Google Maps embed and search links
+## How It Works
 
-## 🏃‍♂️ How to Run Locally
-1. Clone the repository: `git clone https://github.com/pariporwal27/VoteSmart-AI.git`
-2. Install dependencies: `npm install`
-3. Create a `.env` file based on `.env.example` and add your Google Gemini API Key.
-4. Start the server: `npm run dev`
-5. Run tests: `npm run test` (uses Vitest)
-6. Build for production: `npm run build`
+* **Hero and education hub:** Introduces the product and links users to simplified civic learning resources.
+* **Personalized roadmap:** Generates an interactive checklist for eligibility, documents, registration, booth lookup, and election day.
+* **Polling booth finder:** Lets users search by city, select a booth, preview it on Google Maps, open directions, and verify the location on Google Search.
+* **Election timeline:** Shows key dates and provides one-click Google Calendar reminders.
+* **VoteSmart Assistant:** Uses Google Gemini (`gemini-2.5-flash`) to answer election-related questions with a neutral civic-guide system prompt.
+
+## Latest Features
+
+* Hindi / English language toggle across the UI and chatbot.
+* Microphone voice input for chatbot questions.
+* BLO helpline call button in the assistant section.
+* Form 6 links in both the timeline and personalized roadmap.
+* Polling Booth Finder with city-based results.
+* Google Maps booth preview and Google Maps directions links.
+* Google Search verification links for booth addresses.
+* Google Calendar reminders for registration, roll publication, election day, and results.
+* Dark mode toggle with class-based Tailwind v4 support and improved contrast.
+* Loading skeleton screens for lazy-loaded sections.
+* Google Analytics 4 support via `VITE_GA_MEASUREMENT_ID`.
+* Keyboard shortcuts help modal available from the navbar or by pressing `?`.
+* PWA manifest and SEO/Open Graph/Twitter meta tags.
+* Skip-to-content accessibility link.
+* Feedback email button.
+* Gemini demo fallback when `VITE_GEMINI_API_KEY` is missing.
+
+## Google Services Integration
+
+* **Google Gemini:** Powers the VoteSmart Assistant through `@google/generative-ai`.
+* **Google Maps:** Embeds selected booth locations and opens directions in Google Maps.
+* **Google Calendar:** Creates event templates for important election deadlines.
+* **Google Search:** Opens booth address verification searches.
+* **Google Analytics:** Optional GA4 tracking can be enabled with `VITE_GA_MEASUREMENT_ID`.
+
+## Security and Quality
+
+* Input validation and sanitization for forms and chatbot inputs.
+* Chatbot rate limiting to reduce abuse.
+* Error handling utilities and user-friendly fallback states.
+* Network/offline error handling support.
+* Vitest test suite for utility behavior.
+* ARIA labels, keyboard support, focusable controls, and skip link.
+* Lazy loading and code splitting for better performance.
+
+## Tech Stack
+
+* **Frontend:** React, Vite, Tailwind CSS v4
+* **Animations:** Framer Motion
+* **Icons:** Lucide React
+* **AI:** Google Gemini API
+* **Maps and productivity:** Google Maps embeds, Google Calendar templates, Google Search links
+* **Testing:** Vitest, React Testing Library
+* **Deployment:** Vercel
+
+## Environment Variables
+
+Create a `.env` file from `.env.example`.
+
+```bash
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+`VITE_GEMINI_API_KEY` enables live AI responses. `VITE_GA_MEASUREMENT_ID` is optional and enables Google Analytics 4 tracking.
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Verify
+
+```bash
+npm run lint
+npm test -- --run
+npm run build
+```
+
+## Assumptions
+
+* Users have internet access for Gemini, Maps, Calendar, Search, and external civic resources.
+* Reviewers can add their own Gemini API key locally.
+* Polling booth data is mocked for MVP demonstration, while map/search links show how real address data would plug into the workflow.

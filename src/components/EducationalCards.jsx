@@ -9,7 +9,7 @@ const EducationalCards = () => {
       title: "How Elections Work",
       desc: "Understand the democratic process, how candidates are elected, and the structure of local, state, and national governments.",
       color: "bg-blue-50 dark:bg-blue-900/20",
-      link: "https://eci.gov.in/electoral-process/"
+      link: "https://ecisveep.nic.in/"
     },
     {
       icon: <FileText className="text-purple-500" size={32} />,
@@ -30,7 +30,7 @@ const EducationalCards = () => {
       title: "Safety & Privacy",
       desc: "Learn about EVMs, VVPATs, and how the election commission ensures your vote remains completely secret.",
       color: "bg-amber-50 dark:bg-amber-900/20",
-      link: "https://eci.gov.in/evm/"
+      link: "https://www.eci.gov.in/faqs/evm-vvpat-faqs/"
     }
   ];
 

@@ -2,34 +2,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ClipboardList, MapPin, CheckSquare, MessagesSquare } from 'lucide-react';
 
-const steps = [
+// Icons and colors for each step (not translatable)
+const stepConfig = [
   {
-    icon: <ClipboardList size={28} className="text-blue-500" />,
+    icon: <ClipboardList size={32} className="text-blue-500" />,
     color: 'bg-blue-100 dark:bg-blue-900/30',
-    step: '01',
-    title: 'Check Your Eligibility',
-    desc: 'Enter your age, city, and registration status to instantly see if you qualify to vote.',
+    borderColor: 'border-blue-300 dark:border-blue-700',
   },
   {
-    icon: <MapPin size={28} className="text-purple-500" />,
+    icon: <MapPin size={32} className="text-purple-500" />,
     color: 'bg-purple-100 dark:bg-purple-900/30',
-    step: '02',
-    title: 'Get Your Roadmap',
-    desc: 'Receive a personalized, step-by-step checklist tailored to your specific situation.',
+    borderColor: 'border-purple-300 dark:border-purple-700',
   },
   {
-    icon: <MessagesSquare size={28} className="text-teal-500" />,
+    icon: <MessagesSquare size={32} className="text-teal-500" />,
     color: 'bg-teal-100 dark:bg-teal-900/30',
-    step: '03',
-    title: 'Ask Any Question',
-    desc: 'Have doubts? Our Gemini-powered AI assistant answers anything in plain, simple language.',
+    borderColor: 'border-teal-300 dark:border-teal-700',
   },
   {
-    icon: <CheckSquare size={28} className="text-green-500" />,
+    icon: <CheckSquare size={32} className="text-green-500" />,
     color: 'bg-green-100 dark:bg-green-900/30',
-    step: '04',
-    title: 'Vote with Confidence',
-    desc: 'Head to your polling booth fully prepared with all documents and the right knowledge.',
+    borderColor: 'border-green-300 dark:border-green-700',
   },
 ];
 
@@ -37,7 +30,7 @@ const HowItWorks = ({ t }) => {
   return (
     <section id="how-it-works" className="py-20 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+        <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -67,30 +60,44 @@ const HowItWorks = ({ t }) => {
           </motion.p>
         </div>
 
-        <div className="relative grid md:grid-cols-4 gap-8">
+        <div className="relative">
           {/* Connecting line on desktop */}
-          <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-blue-200 via-teal-200 to-green-200 dark:from-blue-800 dark:via-teal-800 dark:to-green-800" />
+          <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-purple-200 via-teal-200 to-green-200 dark:from-blue-800 dark:via-purple-800 dark:via-teal-800 dark:to-green-800" />
 
-          {t.howItWorks.steps.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="relative flex flex-col items-center text-center"
-            >
-              {/* Step number bubble */}
-              <div className={`w-20 h-20 rounded-2xl ${s.color} flex items-center justify-center mb-5 shadow-md relative z-10`}>
-                {s.icon}
-                <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[var(--primary)] text-white text-xs font-bold flex items-center justify-center shadow">
-                  {s.step}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{s.title}</h3>
-              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{s.desc}</p>
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+            {t.howItWorks.steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="relative flex flex-col items-center text-center"
+              >
+                {/* Step icon container */}
+                <div
+                  className={`w-24 h-24 rounded-2xl ${stepConfig[i].color} border-2 ${stepConfig[i].borderColor} flex items-center justify-center mb-6 shadow-lg relative z-10 flex-shrink-0`}
+                >
+                  {stepConfig[i].icon}
+                </div>
+
+                {/* Step number badge */}
+                <div className="absolute top-8 -right-3 w-10 h-10 rounded-full bg-[var(--primary)] text-white text-sm font-bold flex items-center justify-center shadow-lg border-4 border-white dark:border-slate-900">
+                  {step.step}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1">
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

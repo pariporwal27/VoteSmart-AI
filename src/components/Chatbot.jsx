@@ -10,7 +10,7 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [apiError, setApiError] = useState(false);
-  const messagesEndRef = useRef(null);
+  const chatWindowRef = useRef(null);
 
   // Initialize Gemini API
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -27,7 +27,9 @@ const Chatbot = () => {
   ];
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -122,7 +124,7 @@ const Chatbot = () => {
           </div>
 
           {/* Chat Window */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div ref={chatWindowRef} className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
             <AnimatePresence>
               {messages.map((msg) => (
                 <motion.div
@@ -171,7 +173,6 @@ const Chatbot = () => {
                 </div>
               </motion.div>
             )}
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Replies */}

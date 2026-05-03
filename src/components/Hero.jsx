@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, ShieldCheck, MapPin, Users, Vote, Star } from 'lucide-react';
 
@@ -79,7 +78,7 @@ const Hero = ({ t }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6"
             >
               {t.hero.titleLine1} <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]">
@@ -153,7 +152,7 @@ const Hero = ({ t }) => {
             </motion.div>
 
             {/* Floating stat cards */}
-            <div className="flex gap-4 w-full max-w-sm">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-sm">
               <FloatCard delay={0.5} className="flex-1">
                 <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-lg border border-slate-100 dark:border-slate-700 text-center">
                   <Users size={22} className="text-blue-500 mx-auto mb-1" />

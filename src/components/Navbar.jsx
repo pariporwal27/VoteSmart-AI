@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Vote, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Vote, Menu, X, Moon, Sun, Keyboard } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Navbar = ({ t, language, setLanguage }) => {
+const Navbar = ({ t, language, setLanguage, theme, toggleTheme, onOpenShortcuts }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,6 +40,24 @@ const Navbar = ({ t, language, setLanguage }) => {
             </a>
           ))}
           <button
+            type="button"
+            onClick={onOpenShortcuts}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+            aria-label="Open keyboard shortcuts"
+            title="Keyboard shortcuts"
+          >
+            <Keyboard size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
             onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
             className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
@@ -57,6 +75,8 @@ const Navbar = ({ t, language, setLanguage }) => {
         <button
           className="md:hidden p-2 text-slate-600 dark:text-slate-300"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -80,6 +100,28 @@ const Navbar = ({ t, language, setLanguage }) => {
                 {link.name}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                toggleTheme();
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex w-full items-center justify-between rounded-lg bg-slate-100 px-5 py-3 text-left text-base font-semibold text-slate-900 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+            >
+              <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                onOpenShortcuts();
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex w-full items-center justify-between rounded-lg bg-slate-100 px-5 py-3 text-left text-base font-semibold text-slate-900 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+            >
+              <span>Keyboard shortcuts</span>
+              <Keyboard size={18} />
+            </button>
             <button
               onClick={() => {
                 setLanguage(language === 'en' ? 'hi' : 'en');

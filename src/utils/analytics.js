@@ -5,6 +5,7 @@
 
 export const initializeGoogleAnalytics = (measurementId) => {
   if (!measurementId) return;
+  if (window.gtag) return;
 
   // Load Google Analytics script
   const script = document.createElement('script');

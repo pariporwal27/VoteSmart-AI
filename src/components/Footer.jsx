@@ -1,4 +1,3 @@
-import React from 'react';
 import { Vote, Mail } from 'lucide-react';
 
 const Footer = ({ t }) => {

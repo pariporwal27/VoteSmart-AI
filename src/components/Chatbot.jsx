@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { Fragment, useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, Sparkles, AlertCircle, Mic, MicOff } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { sanitizeInput, validateChatInput, sanitizeChatResponse, RateLimiter } from '../utils/security';
+import { trackChatMessage } from '../utils/analytics';
 
 const Chatbot = ({ t, language }) => {
   const [messages, setMessages] = useState([
@@ -10,13 +11,13 @@ const Chatbot = ({ t, language }) => {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [apiError, setApiError] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [recognitionSupported, setRecognitionSupported] = useState(false);
+  const [recognitionSupported] = useState(() => Boolean(window.SpeechRecognition || window.webkitSpeechRecognition));
   const [rateLimitError, setRateLimitError] = useState(false);
   const chatWindowRef = useRef(null);
   const recognitionRef = useRef(null);
   const rateLimiterRef = useRef(new RateLimiter(10, 60000)); // 10 requests per minute
+  const messageIdRef = useRef(1);
 
   // Initialize Gemini API
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -38,11 +39,9 @@ const Chatbot = ({ t, language }) => {
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      setRecognitionSupported(false);
       return;
     }
 
-    setRecognitionSupported(true);
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
@@ -119,21 +118,22 @@ const Chatbot = ({ t, language }) => {
     const sanitizedText = sanitizeInput(text);
     
     // Add user message to UI
-    const userMsg = { id: Date.now(), text: sanitizedText, sender: 'user' };
+    messageIdRef.current += 1;
+    const userMsg = { id: messageIdRef.current, text: sanitizedText, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
+    trackChatMessage('user');
     setInput('');
     setIsTyping(true);
-    setApiError(false);
 
     if (!genAI) {
       setTimeout(() => {
+        messageIdRef.current += 1;
         setMessages(prev => [...prev, { 
-          id: Date.now() + 1, 
+          id: messageIdRef.current, 
           text: t.chatbot.demoError,
           sender: 'ai' 
         }]);
         setIsTyping(false);
-        setApiError(true);
       }, 1000);
       return;
     }
@@ -158,11 +158,14 @@ const Chatbot = ({ t, language }) => {
         { role: "model", parts: [{ text: responseText }] }
       ]);
 
-      setMessages(prev => [...prev, { id: Date.now() + 1, text: responseText, sender: 'ai' }]);
+      messageIdRef.current += 1;
+      setMessages(prev => [...prev, { id: messageIdRef.current, text: responseText, sender: 'ai' }]);
+      trackChatMessage('assistant');
     } catch (error) {
       console.error("AI Error:", error);
+      messageIdRef.current += 1;
       setMessages(prev => [...prev, { 
-        id: Date.now() + 1, 
+        id: messageIdRef.current, 
         text: t.chatbot.errorMessage,
         sender: 'ai' 
       }]);
@@ -240,10 +243,10 @@ const Chatbot = ({ t, language }) => {
                     }`}>
                       {/* Render markdown-like spacing manually for simple AI text */}
                       {msg.text.split('\n').map((line, i) => (
-                        <React.Fragment key={i}>
+                        <Fragment key={i}>
                           {line.startsWith('* ') ? <li className="ml-4">{line.substring(2)}</li> : line}
                           {i !== msg.text.split('\n').length - 1 && <br />}
-                        </React.Fragment>
+                        </Fragment>
                       ))}
                     </div>
                   </div>

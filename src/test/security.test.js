@@ -4,7 +4,6 @@ import {
   validateChatInput,
   validateAge,
   validateCity,
-  sanitizeChatResponse,
   RateLimiter,
 } from '../utils/security';
 

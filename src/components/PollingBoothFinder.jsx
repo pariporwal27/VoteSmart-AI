@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Search, AlertCircle } from 'lucide-react';
 import { sanitizeInput, validateCity } from '../utils/security';
 
-const PollingBoothFinder = ({ t, language }) => {
+const PollingBoothFinder = ({ language }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [booths, setBooths] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -76,7 +76,7 @@ const PollingBoothFinder = ({ t, language }) => {
         </div>
 
         <form onSubmit={handleSearch} className="space-y-6">
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={searchQuery}
@@ -89,7 +89,7 @@ const PollingBoothFinder = ({ t, language }) => {
               type="submit"
               disabled={isSearching}
               aria-label={language === 'hi' ? 'खोज करें' : 'Search'}
-              className="px-6 py-3 bg-[var(--primary)] text-white rounded-lg font-semibold hover:bg-blue-800 disabled:opacity-50 transition-colors flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[var(--primary)] text-white rounded-lg font-semibold hover:bg-blue-800 disabled:opacity-50 transition-colors"
             >
               <Search size={18} />
               {isSearching ? (language === 'hi' ? 'खोज रहे हैं...' : 'Searching...') : (language === 'hi' ? 'खोज' : 'Search')}
@@ -120,7 +120,7 @@ const PollingBoothFinder = ({ t, language }) => {
               >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{booth.name}</h3>
-                  <span className="text-sm font-medium text-[var(--primary)]">{booth.distance}</span>
+                  <span className="ml-3 shrink-0 text-sm font-medium text-[var(--primary)]">{booth.distance}</span>
                 </div>
                 <p className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
                   <MapPin size={16} /> {booth.address}

@@ -2,6 +2,7 @@
  * Error Handling Utilities
  * Graceful error handling and user-friendly messaging
  */
+import React from 'react';
 
 export class APIError extends Error {
   constructor(message, statusCode, originalError) {

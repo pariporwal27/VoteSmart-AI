@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { ClipboardList, MapPin, CheckSquare, MessagesSquare } from 'lucide-react';
 

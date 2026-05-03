@@ -10,37 +10,19 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-192-maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ],
   "categories": ["civic", "education"],
-  "screenshots": [
-    {
-      "src": "/screenshot-540.png",
-      "sizes": "540x720",
-      "type": "image/png"
-    },
-    {
-      "src": "/screenshot-1080.png",
-      "sizes": "1080x1440",
-      "type": "image/png"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Check Eligibility",
@@ -49,8 +31,9 @@
       "url": "/?shortcut=eligibility",
       "icons": [
         {
-          "src": "/shortcut-check.png",
-          "sizes": "192x192"
+          "src": "/favicon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -61,8 +44,9 @@
       "url": "/?shortcut=chatbot",
       "icons": [
         {
-          "src": "/shortcut-chat.png",
-          "sizes": "192x192"
+          "src": "/favicon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
         }
       ]
     }

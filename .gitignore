@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+test-gemini.mjs
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -104,7 +104,7 @@ const PersonalizedRoadmap = () => {
                     className={`relative pl-0 md:pl-16 cursor-pointer group`}
                     onClick={() => toggleTask(item.id)}
                   >
-                    <div className={`hidden md:flex absolute left-4 w-5 h-5 -translate-x-1/2 rounded-full border-2 bg-white dark:bg-slate-900 items-center justify-center z-10 transition-colors ${item.done ? 'border-green-500 bg-green-500' : 'border-slate-300 dark:border-slate-600'}`}>
+                    <div className={`hidden md:flex absolute left-4 w-5 h-5 -translate-x-1/2 rounded-full border-2 items-center justify-center z-10 transition-colors ${item.done ? 'border-green-500 bg-green-500' : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600'}`}>
                       {item.done && <div className="w-2 h-2 rounded-full bg-white"></div>}
                     </div>
                     

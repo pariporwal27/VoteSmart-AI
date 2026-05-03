@@ -120,6 +120,19 @@ const PersonalizedRoadmap = ({ t }) => {
                             </h4>
                             <p className={`text-sm mt-1 ${item.done ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>
                               {item.desc}
+                              {item.id === 3 && formData.voterStatus !== 'registered' && (
+                                <>
+                                  {' '}
+                                  <a
+                                    href={t.roadmap.form.form6Url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="font-semibold text-[var(--primary)] hover:underline"
+                                  >
+                                    {t.roadmap.form.form6LinkLabel}
+                                  </a>
+                                </>
+                              )}
                             </p>
                           </div>
                         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Bot, User, Sparkles, AlertCircle } from 'lucide-react';
+import { Send, Bot, User, Sparkles, AlertCircle, Mic, MicOff } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const Chatbot = ({ t, language }) => {
@@ -10,7 +10,10 @@ const Chatbot = ({ t, language }) => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [apiError, setApiError] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [recognitionSupported, setRecognitionSupported] = useState(false);
   const chatWindowRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   // Initialize Gemini API
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -20,6 +23,8 @@ const Chatbot = ({ t, language }) => {
   const [chatHistory, setChatHistory] = useState([]);
 
   const quickReplies = t.chatbot.quickReplies;
+  const helplineNumber = t.chatbot.helplineNumber;
+  const helplineTel = `tel:${t.chatbot.helplineNumber.replace(/\s+/g, '')}`;
 
   const scrollToBottom = () => {
     if (chatWindowRef.current) {
@@ -28,11 +33,71 @@ const Chatbot = ({ t, language }) => {
   };
 
   useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setRecognitionSupported(false);
+      return;
+    }
+
+    setRecognitionSupported(true);
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = language === 'hi' ? 'hi-IN' : 'en-US';
+
+    recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0].transcript)
+        .join('');
+      setInput(transcript);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.onerror = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      if (recognitionRef.current && recognitionRef.current.abort) {
+        recognitionRef.current.abort();
+      }
+    };
+  }, [language]);
+
+  useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  const stopListening = () => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop();
+    }
+    setIsListening(false);
+  };
+
+  const startListening = () => {
+    if (!recognitionSupported || !recognitionRef.current) return;
+    recognitionRef.current.lang = language === 'hi' ? 'hi-IN' : 'en-US';
+    try {
+      recognitionRef.current.start();
+      setIsListening(true);
+    } catch (error) {
+      console.error('Speech recognition start failed', error);
+      setIsListening(false);
+    }
+  };
+
   const handleSend = async (text) => {
     if (!text.trim()) return;
+    if (isListening) {
+      stopListening();
+    }
     
     // Add user message to UI
     const userMsg = { id: Date.now(), text, sender: 'user' };
@@ -171,39 +236,58 @@ const Chatbot = ({ t, language }) => {
           </div>
 
           {/* Quick Replies */}
-          <div className="p-3 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex gap-2 overflow-x-auto no-scrollbar">
-            {quickReplies.map((reply, i) => (
-              <button
-                key={i}
-                onClick={() => handleSend(reply)}
-                className="whitespace-nowrap px-4 py-2 rounded-full border border-[var(--primary)] text-[var(--primary)] dark:text-blue-400 text-sm hover:bg-[var(--primary)] hover:text-white transition-colors shadow-sm"
+          <div className="p-3 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex flex-col gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                {quickReplies.map((reply, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(reply)}
+                    className="whitespace-nowrap px-4 py-2 rounded-full border border-[var(--primary)] text-[var(--primary)] dark:text-blue-400 text-sm hover:bg-[var(--primary)] hover:text-white transition-colors shadow-sm"
+                  >
+                    {reply}
+                  </button>
+                ))}
+              </div>
+              <a
+                href={helplineTel}
+                className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-[var(--primary)] text-white hover:bg-blue-800 transition-colors shadow-sm"
               >
-                {reply}
-              </button>
-            ))}
-          </div>
-
-          {/* Input Area */}
-          <div className="p-4 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700">
-            <form 
-              onSubmit={(e) => { e.preventDefault(); handleSend(input); }}
-              className="flex gap-2"
-            >
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder={t.chatbot.inputPlaceholder}
-                className="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm dark:text-white shadow-inner"
-              />
+                {t.chatbot.helplineLabel}
+              </a>
+            </div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{t.chatbot.helplineDescription} {helplineNumber}</p>
+            <div className="flex items-center gap-2">
               <button
-                type="submit"
-                disabled={!input.trim() || isTyping}
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-[var(--primary)] text-white hover:bg-blue-800 disabled:opacity-50 transition-colors shadow-md"
+                type="button"
+                onClick={isListening ? stopListening : startListening}
+                disabled={!recognitionSupported}
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-sm"
+                aria-label={isListening ? t.chatbot.micLabelStop : t.chatbot.micLabelStart}
+                title={!recognitionSupported ? t.chatbot.micUnsupported : isListening ? t.chatbot.micListening : t.chatbot.micLabelStart}
               >
-                <Send size={18} className="ml-1" />
+                {isListening ? <MicOff size={18} /> : <Mic size={18} />}
               </button>
-            </form>
+              <form 
+                onSubmit={(e) => { e.preventDefault(); handleSend(input); }}
+                className="flex gap-2 flex-1"
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={isListening ? t.chatbot.micListening : t.chatbot.inputPlaceholder}
+                  className="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm dark:text-white shadow-inner"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isTyping}
+                  className="w-12 h-12 flex items-center justify-center rounded-full bg-[var(--primary)] text-white hover:bg-blue-800 disabled:opacity-50 transition-colors shadow-md"
+                >
+                  <Send size={18} className="ml-1" />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

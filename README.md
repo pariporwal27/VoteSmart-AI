@@ -26,7 +26,15 @@ The platform is designed to break down the overwhelming process of voting into m
 *   **BLO helpline call button** added to the chat assistant section for quick support.
 *   **Form 6 download link** added directly to the election timeline registration deadline step.
 *   **Form 6 access in the Personalized Roadmap** registration step for easy voter onboarding.
-*   **Polling Booth Finder** - New section to search and locate nearby polling booths by city.
+*   **Polling Booth Finder** - Search and locate nearby polling booths by city.
+*   **Google Maps booth preview** - Select any found booth to view its map location and open directions in Google Maps.
+*   **Dark mode toggle** with improved contrast for forms, cards, navigation, and section backgrounds.
+*   **Loading skeleton screens** for lazy-loaded sections to keep the app feeling responsive.
+*   **Google Analytics 4 support** through `VITE_GA_MEASUREMENT_ID`.
+*   **Keyboard shortcuts help modal** available from the navbar or by pressing `?`.
+*   **PWA manifest and SEO meta tags** for better installability and sharing.
+*   **Skip-to-content link** for keyboard and screen-reader accessibility.
+*   **Feedback email button** for quick support contact.
 *   **Live Vercel deployment** available at `https://vote-smart-ai-seven.vercel.app`.
 *   **Gemini demo fallback** when `VITE_GEMINI_API_KEY` is not provided, with a friendly notice shown in the chat.
 
@@ -43,6 +51,8 @@ The platform is designed to break down the overwhelming process of voting into m
 **Google Generative AI (Gemini)** is the core intelligence driving the VoteSmart Assistant.
 *   **Implementation**: We utilize the `@google/generative-ai` SDK to establish a chat session.
 *   **Optimization**: We leverage the Gemini Flash model for sub-second response latency, ensuring the bot feels like a live, snappy assistant. The AI maintains conversation history context, allowing for natural follow-up questions from the user.
+*   **Google Maps**: Polling booth search results include an embedded Google Maps preview and direct links for opening the selected booth in Google Maps.
+*   **Google Analytics**: Optional GA4 tracking can be enabled by setting `VITE_GA_MEASUREMENT_ID`.
 
 ## ⚙️ Assumptions Made
 1.  **Connectivity**: The solution assumes the user has a stable internet connection to communicate with the Gemini LLM.
@@ -54,6 +64,7 @@ The platform is designed to break down the overwhelming process of voting into m
 *   **Animations**: Framer Motion
 *   **Icons**: Lucide React
 *   **AI Backend**: Google Gemini API
+*   **Maps**: Google Maps embed and search links
 
 ## 🏃‍♂️ How to Run Locally
 1. Clone the repository: `git clone https://github.com/pariporwal27/VoteSmart-AI.git`

@@ -316,7 +316,7 @@ const Chatbot = ({ t, language }) => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={isListening ? t.chatbot.micListening : t.chatbot.inputPlaceholder}
-                  className="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm dark:text-white shadow-inner"
+                  className="form-field flex-1 rounded-full border-none bg-slate-100 px-5 py-3 text-sm shadow-inner dark:bg-slate-950"
                 />
                 <button
                   type="submit"

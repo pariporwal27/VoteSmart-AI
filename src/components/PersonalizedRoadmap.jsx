@@ -30,7 +30,7 @@ const PersonalizedRoadmap = ({ t }) => {
   };
 
   return (
-    <section id="roadmap" className="py-20 bg-white dark:bg-[var(--bg)]">
+    <section id="roadmap" className="py-20 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           
@@ -55,11 +55,11 @@ const PersonalizedRoadmap = ({ t }) => {
               >
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.age}</label>
-                  <input required type="number" min="17" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder="e.g. 18" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                  <input required type="number" min="17" className="form-field w-full rounded-lg px-4 py-3" placeholder="e.g. 18" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.status}</label>
-                  <select required className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" value={formData.voterStatus} onChange={e => setFormData({...formData, voterStatus: e.target.value})}>
+                  <select required className="form-field w-full rounded-lg px-4 py-3" value={formData.voterStatus} onChange={e => setFormData({...formData, voterStatus: e.target.value})}>
                     <option value="" disabled>{t.roadmap.form.statusPlaceholder}</option>
                     <option value="first_time">{t.roadmap.form.firstTime}</option>
                     <option value="registered">{t.roadmap.form.registered}</option>
@@ -68,7 +68,7 @@ const PersonalizedRoadmap = ({ t }) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.city}</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder={t.roadmap.form.cityPlaceholder} value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
+                  <input type="text" className="form-field w-full rounded-lg px-4 py-3" placeholder={t.roadmap.form.cityPlaceholder} value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
                 </div>
                 <button type="submit" className="w-full py-3 px-4 bg-[var(--primary)] text-white rounded-lg font-semibold hover:bg-blue-800 transition-colors mt-2">
                   {t.roadmap.form.submit}

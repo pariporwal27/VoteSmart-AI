@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 text-white mb-4">
               <Vote size={24} className="text-teal-400" />
-              <span className="text-xl font-bold tracking-tight">Election AI</span>
+              <span className="text-xl font-bold tracking-tight">VoteSmart AI</span>
             </div>
             <p className="text-slate-400 text-sm mb-6">
               Simplifying the democratic process for every citizen. Unbiased, secure, and easy to use.
@@ -45,8 +45,8 @@ const Footer = () => {
             <p className="text-slate-400 text-sm mb-4">
               Need technical help with this platform? Reach out to us.
             </p>
-            <a href="mailto:support@electionai.org" className="inline-flex items-center gap-2 text-sm text-teal-400 hover:text-teal-300">
-              <Mail size={16} /> support@electionai.org
+            <a href="mailto:support@votesmart.ai" className="inline-flex items-center gap-2 text-sm text-teal-400 hover:text-teal-300">
+              <Mail size={16} /> support@votesmart.ai
             </a>
           </div>
 
@@ -54,7 +54,7 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-sm">
-            &copy; {new Date().getFullYear()} AI Election Companion. Built for Hackathon MVP.
+            &copy; {new Date().getFullYear()} VoteSmart AI. Built for Hackathon MVP.
           </p>
           <div className="flex gap-4 text-sm text-slate-500">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

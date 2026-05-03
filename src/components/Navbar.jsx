@@ -30,7 +30,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex items-center gap-2 text-[var(--primary)] dark:text-[var(--primary-light)]">
           <Vote size={28} className="text-[var(--secondary)]" />
-          <span className="text-xl font-bold tracking-tight">AI Election Companion</span>
+          <span className="text-xl font-bold tracking-tight">VoteSmart AI</span>
         </div>
 
         {/* Desktop Nav */}

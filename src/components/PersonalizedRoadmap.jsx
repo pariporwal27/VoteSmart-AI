@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Map, CheckCircle2, Circle, ChevronRight } from 'lucide-react';
+import { Map, CheckCircle, Circle, ChevronRight } from 'lucide-react';
 
 const PersonalizedRoadmap = () => {
   const [step, setStep] = useState(1);
@@ -111,8 +111,8 @@ const PersonalizedRoadmap = () => {
                     <div className={`p-5 rounded-2xl border transition-all ${item.done ? 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700'}`}>
                       <div className="flex justify-between items-start">
                         <div className="flex gap-3">
-                          <div className="mt-1 flex-shrink-0 md:hidden">
-                            {item.done ? <CheckCircle2 className="text-green-500" size={20} /> : <Circle className="text-slate-400" size={20} />}
+                          <div className="mt-1 flex-shrink-0 transition-all">
+                            {item.done ? <CheckCircle className="text-green-500" size={20} /> : <Circle className="text-slate-400" size={20} />}
                           </div>
                           <div>
                             <h4 className={`font-semibold text-lg ${item.done ? 'text-green-700 dark:text-green-400' : 'text-slate-900 dark:text-white'}`}>

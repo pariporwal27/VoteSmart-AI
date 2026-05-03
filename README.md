@@ -20,11 +20,14 @@ The platform is designed to break down the overwhelming process of voting into m
 *   **Interactive Election Timeline**: A responsive UI element that visualizes critical approaching deadlines to prevent voter drop-off.
 *   **VoteSmart Assistant (Gemini AI)**: A fully functional chatbot connected to the **Google Gemini API (`gemini-2.5-flash`)**. It utilizes a strict system instruction prompt to ensure all responses are completely unbiased, avoid political jargon, and strictly serve as a civic guide.
 
-## features 
-*   **Hindi / English language toggle** for the full UI and chatbot experience.
-*   **Microphone voice input** for the chatbot using browser speech recognition.
-*   **BLO helpline call button** added to the chat assistant section for immediate voter support.
+## ✨ Latest Features
+*   **Hindi / English language toggle** across the entire UI and chatbot.
+*   **Microphone voice input** in the chatbot for hands-free question entry.
+*   **BLO helpline call button** added to the chat assistant section for quick support.
 *   **Form 6 download link** added directly to the election timeline registration deadline step.
+*   **Form 6 access in the Personalized Roadmap** registration step for easy voter onboarding.
+*   **Live Vercel deployment** available at `https://vote-smart-ai-seven.vercel.app`.
+*   **Gemini demo fallback** when `VITE_GEMINI_API_KEY` is not provided, with a friendly notice shown in the chat.
 
 ## 🛠️ Google Services Integration
 **Google Generative AI (Gemini)** is the core intelligence driving the VoteSmart Assistant.

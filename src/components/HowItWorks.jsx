@@ -35,7 +35,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
+    <section id="how-it-works" className="py-20 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <motion.div

@@ -103,10 +103,10 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center"
             >
               <a
-                href="#roadmap"
+                href="#how-it-works"
                 className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-[var(--primary)] text-white text-lg font-semibold hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                Check Eligibility <ArrowRight size={20} />
+                Get Started <ArrowRight size={20} />
               </a>
               <a
                 href="#chatbot"

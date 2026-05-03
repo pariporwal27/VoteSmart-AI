@@ -23,3 +23,4 @@ test-gemini.mjs
 *.njsproj
 *.sln
 *.sw?
+.vercel

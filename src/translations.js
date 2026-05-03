@@ -78,7 +78,7 @@ const translations = {
       desc: 'Mark your calendar. Don\'t miss these crucial deadlines.',
       events: [
         { date: 'Oct 15, 2026', title: 'Voter Registration Opens', desc: 'Online portal opens for new voter registrations and address updates.', status: 'past' },
-        { date: 'Nov 10, 2026', title: 'Registration Deadline', desc: 'Last day to submit Form 6 for new enrollment. Post this, no new names will be added.', status: 'current' },
+        { date: 'Nov 10, 2026', title: 'Registration Deadline', desc: 'Last day to submit Form 6 for new enrollment. Post this, no new names will be added.', status: 'current', form6LinkUrl: 'https://eci.gov.in/files/file/111-form-6/', form6LinkLabel: 'Download Form 6' },
         { date: 'Nov 25, 2026', title: 'Electoral Roll Publication', desc: 'Final list of eligible voters is published. Check your name!', status: 'upcoming' },
         { date: 'Dec 05, 2026', title: 'Election Day', desc: 'Polling booths open from 7 AM to 6 PM. Cast your vote!', status: 'upcoming' },
         { date: 'Dec 08, 2026', title: 'Results Declared', desc: 'Counting of votes and official declaration of results.', status: 'upcoming' },
@@ -233,7 +233,7 @@ const translations = {
       desc: 'अपने कैलेंडर को चिह्नित करें। इन महत्वपूर्ण समयसीमाओं को न चूकें।',
       events: [
         { date: '15 अक्टूबर, 2026', title: 'मतदाता पंजीकरण शुरू', desc: 'नए मतदाता पंजीकरण और पता अपडेट के लिए ऑनलाइन पोर्टल खुलता है।', status: 'past' },
-        { date: '10 नवंबर, 2026', title: 'पंजीकरण की अंतिम तिथि', desc: 'Form 6 जमा करने की अंतिम तिथि। इसके बाद नए नाम नहीं जोड़े जाएंगे।', status: 'current' },
+        { date: '10 नवंबर, 2026', title: 'पंजीकरण की अंतिम तिथि', desc: 'Form 6 जमा करने की अंतिम तिथि। इसके बाद नए नाम नहीं जोड़े जाएंगे।', status: 'current', form6LinkUrl: 'https://eci.gov.in/files/file/111-form-6/', form6LinkLabel: 'Form 6 डाउनलोड करें' },
         { date: '25 नवंबर, 2026', title: 'चुनावी सूची प्रकाशित', desc: 'पात्र मतदाताओं की अंतिम सूची प्रकाशित होती है। अपना नाम जांचें!', status: 'upcoming' },
         { date: '05 दिसंबर, 2026', title: 'चुनाव दिवस', desc: 'मतदान केंद्र सुबह 7 बजे से शाम 6 बजे तक खुले रहते हैं। अपना वोट डालें!', status: 'upcoming' },
         { date: '08 दिसंबर, 2026', title: 'परिणाम घोषित', desc: 'मतों की गिनती और आधिकारिक परिणाम घोषित किए जाते हैं।', status: 'upcoming' },

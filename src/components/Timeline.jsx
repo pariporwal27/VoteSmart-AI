@@ -64,6 +64,16 @@ const Timeline = ({ t }) => {
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{event.title}</h3>
                     <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                       {event.desc}
+                      {event.form6LinkUrl && (
+                        <a
+                          href={event.form6LinkUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="ml-1 font-semibold text-[var(--primary)] hover:underline"
+                        >
+                          {event.form6LinkLabel}
+                        </a>
+                      )}
                     </p>
                   </div>
                 </div>

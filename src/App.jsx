@@ -7,12 +7,15 @@ import Timeline from './components/Timeline';
 import EducationalCards from './components/EducationalCards';
 import Footer from './components/Footer';
 
+import HowItWorks from './components/HowItWorks';
+
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />
+        <HowItWorks />
         <EducationalCards />
         <PersonalizedRoadmap />
         <Timeline />

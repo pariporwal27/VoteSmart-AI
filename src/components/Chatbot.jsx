@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, Sparkles, AlertCircle, Mic, MicOff } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { sanitizeInput, validateChatInput, sanitizeChatResponse, RateLimiter } from '../utils/security';
 
 const Chatbot = ({ t, language }) => {
   const [messages, setMessages] = useState([
@@ -12,8 +13,10 @@ const Chatbot = ({ t, language }) => {
   const [apiError, setApiError] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [recognitionSupported, setRecognitionSupported] = useState(false);
+  const [rateLimitError, setRateLimitError] = useState(false);
   const chatWindowRef = useRef(null);
   const recognitionRef = useRef(null);
+  const rateLimiterRef = useRef(new RateLimiter(10, 60000)); // 10 requests per minute
 
   // Initialize Gemini API
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -94,13 +97,29 @@ const Chatbot = ({ t, language }) => {
   };
 
   const handleSend = async (text) => {
-    if (!text.trim()) return;
+    // Validate input
+    if (!validateChatInput(text)) {
+      setRateLimitError(true);
+      setTimeout(() => setRateLimitError(false), 3000);
+      return;
+    }
+
+    // Check rate limiting
+    if (!rateLimiterRef.current.isAllowed()) {
+      setRateLimitError(true);
+      setTimeout(() => setRateLimitError(false), 3000);
+      return;
+    }
+
     if (isListening) {
       stopListening();
     }
+
+    // Sanitize input
+    const sanitizedText = sanitizeInput(text);
     
     // Add user message to UI
-    const userMsg = { id: Date.now(), text, sender: 'user' };
+    const userMsg = { id: Date.now(), text: sanitizedText, sender: 'user' };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
@@ -129,13 +148,13 @@ const Chatbot = ({ t, language }) => {
         history: chatHistory,
       });
 
-      const result = await chat.sendMessage(text);
-      const responseText = result.response.text();
+      const result = await chat.sendMessage(sanitizedText);
+      const responseText = sanitizeChatResponse(result.response.text());
 
       // Update history for context
       setChatHistory([
         ...chatHistory,
-        { role: "user", parts: [{ text }] },
+        { role: "user", parts: [{ text: sanitizedText }] },
         { role: "model", parts: [{ text: responseText }] }
       ]);
 
@@ -185,6 +204,23 @@ const Chatbot = ({ t, language }) => {
 
           {/* Chat Window */}
           <div ref={chatWindowRef} className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+            {rateLimitError && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex gap-3"
+              >
+                <AlertCircle className="text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" size={20} />
+                <div>
+                  <p className="text-red-700 dark:text-red-400 font-semibold text-sm">
+                    {language === 'hi' ? 'बहुत सारे अनुरोध' : 'Too many requests'}
+                  </p>
+                  <p className="text-red-600 dark:text-red-500 text-xs mt-1">
+                    {language === 'hi' ? 'कृपया एक क्षण प्रतीक्षा करें' : 'Please wait a moment'}
+                  </p>
+                </div>
+              </motion.div>
+            )}
             <AnimatePresence>
               {messages.map((msg) => (
                 <motion.div

@@ -7,6 +7,7 @@ import Timeline from './components/Timeline';
 import EducationalCards from './components/EducationalCards';
 import Footer from './components/Footer';
 import HowItWorks from './components/HowItWorks';
+import PollingBoothFinder from './components/PollingBoothFinder';
 import translations from './translations';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <HowItWorks t={t} />
         <EducationalCards t={t} />
         <PersonalizedRoadmap t={t} />
+        <PollingBoothFinder t={t} language={language} />
         <Timeline t={t} />
         <Chatbot t={t} language={language} />
       </main>

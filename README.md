@@ -26,8 +26,18 @@ The platform is designed to break down the overwhelming process of voting into m
 *   **BLO helpline call button** added to the chat assistant section for quick support.
 *   **Form 6 download link** added directly to the election timeline registration deadline step.
 *   **Form 6 access in the Personalized Roadmap** registration step for easy voter onboarding.
+*   **Polling Booth Finder** - New section to search and locate nearby polling booths by city.
 *   **Live Vercel deployment** available at `https://vote-smart-ai-seven.vercel.app`.
 *   **Gemini demo fallback** when `VITE_GEMINI_API_KEY` is not provided, with a friendly notice shown in the chat.
+
+## 🔒 Security & Quality Improvements (Latest)
+*   **Input validation & sanitization** across all forms and chatbot inputs to prevent XSS attacks.
+*   **Rate limiting** on chatbot API calls to prevent abuse (10 requests per minute).
+*   **Error boundary components** for graceful error handling and user recovery.
+*   **Network error detection** with retry suggestions for offline scenarios.
+*   **Test suite added** with Vitest + React Testing Library for components and utilities.
+*   **Improved accessibility** with ARIA labels, screen reader announcements, and focus management.
+*   **Error logging utility** for debugging and monitoring (ready for Sentry integration).
 
 ## 🛠️ Google Services Integration
 **Google Generative AI (Gemini)** is the core intelligence driving the VoteSmart Assistant.
@@ -50,3 +60,5 @@ The platform is designed to break down the overwhelming process of voting into m
 2. Install dependencies: `npm install`
 3. Create a `.env` file based on `.env.example` and add your Google Gemini API Key.
 4. Start the server: `npm run dev`
+5. Run tests: `npm run test` (uses Vitest)
+6. Build for production: `npm run build`

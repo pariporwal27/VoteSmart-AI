@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vote, Twitter, Facebook, Instagram, Mail } from 'lucide-react';
+import { Vote, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -16,9 +16,7 @@ const Footer = () => {
               Simplifying the democratic process for every citizen. Unbiased, secure, and easy to use.
             </p>
             <div className="flex gap-4 text-slate-400">
-              <a href="#" className="hover:text-white transition-colors"><Twitter size={20} /></a>
-              <a href="#" className="hover:text-white transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="hover:text-white transition-colors"><Instagram size={20} /></a>
+              <a href="#" className="hover:text-white transition-colors"><Mail size={20} /></a>
             </div>
           </div>
 

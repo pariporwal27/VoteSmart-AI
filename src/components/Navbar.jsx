@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Vote, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = ({ t, language, setLanguage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -14,12 +14,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Eligibility', href: '#roadmap' },
-    { name: 'Timeline', href: '#timeline' },
-    { name: 'Ask AI', href: '#chatbot' },
-  ];
+  const navLinks = t.nav.links;
 
   return (
     <header
@@ -34,7 +29,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-4 items-center">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -44,11 +39,17 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
+            className="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            {t.nav.languageButton}
+          </button>
           <a
             href="#how-it-works"
             className="px-5 py-2.5 rounded-full bg-[var(--primary)] text-white text-sm font-semibold hover:bg-[var(--primary-light)] transition-colors shadow-sm"
           >
-            Get Started
+            {t.nav.cta}
           </a>
         </nav>
 
@@ -79,12 +80,21 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <button
+              onClick={() => {
+                setLanguage(language === 'en' ? 'hi' : 'en');
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full text-left px-5 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-base font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              {t.nav.languageButton}
+            </button>
             <a
               href="#how-it-works"
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 text-center px-5 py-3 rounded-lg bg-[var(--primary)] text-white text-base font-semibold"
             >
-              Get Started
+              {t.nav.cta}
             </a>
           </div>
         </motion.div>

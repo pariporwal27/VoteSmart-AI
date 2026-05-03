@@ -52,7 +52,7 @@ const BallotIllustration = () => (
   </div>
 );
 
-const Hero = () => {
+const Hero = ({ t }) => {
   return (
     <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center justify-center min-h-[90vh]">
       {/* Background blobs */}
@@ -72,7 +72,7 @@ const Hero = () => {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6 border border-blue-200 dark:border-blue-800"
             >
               <ShieldCheck size={16} />
-              <span>Your Secure Civic Guide</span>
+              <span>{t.hero.badge}</span>
             </motion.div>
 
             <motion.h1
@@ -83,7 +83,7 @@ const Hero = () => {
             >
               Democracy, <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]">
-                Simplified for You.
+                {t.hero.titleLine2}
               </span>
             </motion.h1>
 
@@ -93,7 +93,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-4 max-w-xl text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 mx-auto lg:mx-0"
             >
-              The intelligent assistant that helps you understand the election process, check eligibility, find your polling booth, and vote with confidence.
+              {t.hero.desc}
             </motion.p>
 
             <motion.div
@@ -106,13 +106,13 @@ const Hero = () => {
                 href="#how-it-works"
                 className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-[var(--primary)] text-white text-lg font-semibold hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                Get Started <ArrowRight size={20} />
+                {t.hero.ctaPrimary} <ArrowRight size={20} />
               </a>
               <a
                 href="#chatbot"
                 className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 text-lg font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
               >
-                Ask AI Assistant
+                {t.hero.ctaSecondary}
               </a>
             </motion.div>
 
@@ -125,15 +125,15 @@ const Hero = () => {
             >
               <div className="flex items-center gap-2">
                 <CheckCircle size={18} className="text-teal-500" />
-                <span>Step-by-step guidance</span>
+                <span>{t.hero.feature1}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={18} className="text-teal-500" />
-                <span>Find polling stations</span>
+                <span>{t.hero.feature2}</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck size={18} className="text-teal-500" />
-                <span>Unbiased & Neutral</span>
+                <span>{t.hero.feature3}</span>
               </div>
             </motion.div>
           </div>
@@ -148,8 +148,8 @@ const Hero = () => {
               className="bg-gradient-to-br from-blue-50 to-teal-50 dark:from-slate-800 dark:to-slate-700 rounded-3xl p-10 shadow-2xl border border-slate-100 dark:border-slate-600 w-full max-w-sm"
             >
               <BallotIllustration />
-              <p className="text-center mt-6 font-bold text-slate-700 dark:text-white text-xl">Cast Your Vote</p>
-              <p className="text-center text-slate-500 dark:text-slate-400 text-sm mt-1">Every vote counts. Make yours matter.</p>
+              <p className="text-center mt-6 font-bold text-slate-700 dark:text-white text-xl">{t.hero.bubbleTitle}</p>
+              <p className="text-center text-slate-500 dark:text-slate-400 text-sm mt-1">{t.hero.bubbleDesc}</p>
             </motion.div>
 
             {/* Floating stat cards */}

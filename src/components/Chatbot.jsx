@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, Sparkles, AlertCircle } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const Chatbot = () => {
+const Chatbot = ({ t, language }) => {
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hi there! I'm VoteSmart AI. I can help you with registration, finding polling booths, or understanding your eligibility. What would you like to know?", sender: 'ai' }
+    { id: 1, text: language === 'hi' ? 'नमस्ते! मैं VoteSmart AI हूँ। मैं आपको पंजीकरण, मतदान स्थान खोजने, या आपकी पात्रता समझने में मदद कर सकता हूँ। आप क्या जानना चाहते हैं?' : "Hi there! I'm VoteSmart AI. I can help you with registration, finding polling booths, or understanding your eligibility. What would you like to know?", sender: 'ai' }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -19,12 +19,7 @@ const Chatbot = () => {
   // We keep a chat history to maintain conversation context
   const [chatHistory, setChatHistory] = useState([]);
 
-  const quickReplies = [
-    "Am I eligible to vote?",
-    "How do I register?",
-    "What documents do I need?",
-    "I lost my Voter ID"
-  ];
+  const quickReplies = t.chatbot.quickReplies;
 
   const scrollToBottom = () => {
     if (chatWindowRef.current) {
@@ -50,7 +45,7 @@ const Chatbot = () => {
       setTimeout(() => {
         setMessages(prev => [...prev, { 
           id: Date.now() + 1, 
-          text: "I'm currently in demo mode! To enable live AI responses, please add your Gemini API key to the .env file as VITE_GEMINI_API_KEY.", 
+          text: t.chatbot.demoError,
           sender: 'ai' 
         }]);
         setIsTyping(false);
@@ -62,7 +57,7 @@ const Chatbot = () => {
     try {
       const model = genAI.getGenerativeModel({ 
         model: "gemini-2.5-flash",
-        systemInstruction: "You are VoteSmart AI, a helpful, unbiased, and friendly election companion assistant. Your goal is to help citizens understand the election process, voter registration, deadlines, and requirements. Provide concise, step-by-step answers. Use formatting like bullet points when helpful. Avoid complicated legal jargon and NEVER show political bias."
+        systemInstruction: `You are VoteSmart AI, a helpful, unbiased, and friendly election companion assistant. Your goal is to help citizens understand the election process, voter registration, deadlines, and requirements. Provide concise, step-by-step answers. Use formatting like bullet points when helpful. Avoid complicated legal jargon and NEVER show political bias. Please respond in ${language === 'hi' ? 'Hindi' : 'English'}.`
       });
 
       const chat = model.startChat({
@@ -97,14 +92,14 @@ const Chatbot = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Ask the AI Assistant
+            {t.chatbot.heading}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-4">
-            Get instant, unbiased answers to all your election-related questions powered by real-time LLM intelligence.
+            {t.chatbot.desc}
           </p>
           {!apiKey && (
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 rounded-lg text-sm">
-              <AlertCircle size={16} /> API Key missing. Running in demo mode.
+              <AlertCircle size={16} /> {t.chatbot.demoMode}
             </div>
           )}
         </div>
@@ -198,7 +193,7 @@ const Chatbot = () => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about voter registration, dates, or rules..."
+                placeholder={t.chatbot.inputPlaceholder}
                 className="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded-full px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm dark:text-white shadow-inner"
               />
               <button

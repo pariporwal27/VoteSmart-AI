@@ -2,24 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CalendarDays, AlertCircle } from 'lucide-react';
 
-const Timeline = () => {
-  const events = [
-    { date: 'Oct 15, 2026', title: 'Voter Registration Opens', desc: 'Online portal opens for new voter registrations and address updates.', status: 'past' },
-    { date: 'Nov 10, 2026', title: 'Registration Deadline', desc: 'Last day to submit Form 6 for new enrollment. Post this, no new names will be added.', status: 'current' },
-    { date: 'Nov 25, 2026', title: 'Electoral Roll Publication', desc: 'Final list of eligible voters is published. Check your name!', status: 'upcoming' },
-    { date: 'Dec 05, 2026', title: 'Election Day', desc: 'Polling booths open from 7 AM to 6 PM. Cast your vote!', status: 'upcoming' },
-    { date: 'Dec 08, 2026', title: 'Results Declared', desc: 'Counting of votes and official declaration of results.', status: 'upcoming' },
-  ];
+const Timeline = ({ t }) => {
+  const events = t.timeline.events;
 
   return (
     <section id="timeline" className="py-20 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Election Timeline
+            {t.timeline.heading}
           </h2>
           <p className="text-slate-600 dark:text-slate-400">
-            Mark your calendar. Don't miss these crucial deadlines.
+            {t.timeline.desc}
           </p>
         </div>
 

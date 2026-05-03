@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Chatbot from './components/Chatbot';
@@ -7,8 +7,12 @@ import Timeline from './components/Timeline';
 import EducationalCards from './components/EducationalCards';
 import Footer from './components/Footer';
 import HowItWorks from './components/HowItWorks';
+import translations from './translations';
 
 function App() {
+  const [language, setLanguage] = useState('en');
+  const t = translations[language];
+
   // Clear any URL hash on initial load so the page always starts at the top
   useEffect(() => {
     if (window.location.hash) {
@@ -19,16 +23,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-      <Navbar />
+      <Navbar t={t} language={language} setLanguage={setLanguage} />
       <main>
-        <Hero />
-        <HowItWorks />
-        <EducationalCards />
-        <PersonalizedRoadmap />
-        <Timeline />
-        <Chatbot />
+        <Hero t={t} />
+        <HowItWorks t={t} />
+        <EducationalCards t={t} />
+        <PersonalizedRoadmap t={t} />
+        <Timeline t={t} />
+        <Chatbot t={t} language={language} />
       </main>
-      <Footer />
+      <Footer t={t} />
     </div>
   );
 }

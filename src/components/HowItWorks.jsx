@@ -33,7 +33,7 @@ const steps = [
   },
 ];
 
-const HowItWorks = () => {
+const HowItWorks = ({ t }) => {
   return (
     <section id="how-it-works" className="py-20 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +45,7 @@ const HowItWorks = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-sm font-medium mb-4"
           >
-            ✨ Simple 4-Step Process
+            {t.howItWorks.badge}
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -54,7 +54,7 @@ const HowItWorks = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
           >
-            How VoteSmart AI Works
+            {t.howItWorks.heading}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -63,7 +63,7 @@ const HowItWorks = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
           >
-            From confusion to confidence in four simple steps. No jargon, no hassle.
+            {t.howItWorks.desc}
           </motion.p>
         </div>
 
@@ -71,7 +71,7 @@ const HowItWorks = () => {
           {/* Connecting line on desktop */}
           <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-blue-200 via-teal-200 to-green-200 dark:from-blue-800 dark:via-teal-800 dark:to-green-800" />
 
-          {steps.map((s, i) => (
+          {t.howItWorks.steps.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Map, CheckCircle, Circle, ChevronRight } from 'lucide-react';
 
-const PersonalizedRoadmap = () => {
+const PersonalizedRoadmap = ({ t }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     age: '',
@@ -15,11 +15,11 @@ const PersonalizedRoadmap = () => {
     e.preventDefault();
     // Logic to generate roadmap based on user input
     const newRoadmap = [
-      { id: 1, title: 'Verify Eligibility', desc: `Confirm you are 18+ by the cutoff date in ${formData.city || 'your area'}.`, done: true },
-      { id: 2, title: 'Gather Documents', desc: 'Get your Aadhaar, PAN, or Passport ready for address proof.', done: false },
-      { id: 3, title: formData.voterStatus === 'registered' ? 'Verify Voter ID' : 'Register to Vote', desc: formData.voterStatus === 'registered' ? 'Check your name on the electoral roll.' : 'Fill out Form 6 online or at the local office.', done: false },
-      { id: 4, title: 'Find Polling Booth', desc: 'Locate your designated polling station 1 week before the election.', done: false },
-      { id: 5, title: 'Vote on Election Day', desc: 'Carry your valid ID and cast your vote safely.', done: false }
+      { id: 1, title: t.roadmap.steps.verifyEligibility, desc: `${t.roadmap.steps.verifyEligibilityDesc.replace('your area', formData.city || 'your area')}`, done: true },
+      { id: 2, title: t.roadmap.steps.gatherDocuments, desc: t.roadmap.steps.gatherDocumentsDesc, done: false },
+      { id: 3, title: formData.voterStatus === 'registered' ? t.roadmap.steps.verifyVoterID : t.roadmap.steps.registerToVote, desc: formData.voterStatus === 'registered' ? t.roadmap.steps.verifyVoterIDDesc : t.roadmap.steps.registerToVoteDesc, done: false },
+      { id: 4, title: t.roadmap.steps.findPolling, desc: t.roadmap.steps.findPollingDesc, done: false },
+      { id: 5, title: t.roadmap.steps.voteOnDay, desc: t.roadmap.steps.voteOnDayDesc, done: false }
     ];
     setRoadmap(newRoadmap);
     setStep(2);
@@ -37,13 +37,13 @@ const PersonalizedRoadmap = () => {
           {/* Left Text / Form Area */}
           <div>
             <div className="inline-flex items-center gap-2 text-[var(--secondary)] font-semibold mb-4 text-sm tracking-wide uppercase">
-              <Map size={18} /> Personalized Journey
+              <Map size={18} /> {t.roadmap.heading}
             </div>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-              Your custom voting checklist in seconds.
+              {t.roadmap.heading}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg">
-              Tell us a bit about yourself, and we'll generate a step-by-step roadmap so you don't miss any deadlines or requirements.
+              {t.roadmap.intro}
             </p>
 
             {step === 1 ? (
@@ -54,35 +54,35 @@ const PersonalizedRoadmap = () => {
                 className="space-y-4 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700"
               >
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Your Age</label>
-                  <input required type="number" min="17" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder="e.g. 18" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.age}</label>
+                  <input required type="number" min="17" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder={t.roadmap.form.cityPlaceholder} value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Current Status</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.status}</label>
                   <select required className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" value={formData.voterStatus} onChange={e => setFormData({...formData, voterStatus: e.target.value})}>
-                    <option value="" disabled>Select status...</option>
-                    <option value="first_time">First-time voter</option>
-                    <option value="registered">Already registered</option>
-                    <option value="moved">Moved to a new city</option>
+                    <option value="" disabled>{t.roadmap.form.statusPlaceholder}</option>
+                    <option value="first_time">{t.roadmap.form.firstTime}</option>
+                    <option value="registered">{t.roadmap.form.registered}</option>
+                    <option value="moved">{t.roadmap.form.moved}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">City/State</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder="e.g. Mumbai" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.city}</label>
+                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder={t.roadmap.form.cityPlaceholder} value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
                 </div>
                 <button type="submit" className="w-full py-3 px-4 bg-[var(--primary)] text-white rounded-lg font-semibold hover:bg-blue-800 transition-colors mt-2">
-                  Generate My Roadmap
+                  {t.roadmap.form.submit}
                 </button>
               </motion.form>
             ) : (
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                 <button onClick={() => setStep(1)} className="text-sm text-[var(--primary)] hover:underline mb-4 flex items-center gap-1">
-                  &larr; Start over
+                  {t.roadmap.form.startOver}
                 </button>
                 <div className="p-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-2xl">
-                  <h3 className="text-green-800 dark:text-green-400 font-semibold mb-2">Roadmap Generated!</h3>
+                  <h3 className="text-green-800 dark:text-green-400 font-semibold mb-2">{t.roadmap.form.generatedTitle}</h3>
                   <p className="text-sm text-green-700 dark:text-green-500">
-                    Follow the steps on the right to complete your election journey. You can check them off as you go.
+                    {t.roadmap.form.generatedDesc}
                   </p>
                 </div>
               </motion.div>

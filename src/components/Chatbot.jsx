@@ -59,7 +59,7 @@ const Chatbot = () => {
 
     try {
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash",
+        model: "gemini-2.5-flash",
         systemInstruction: "You are VoteSmart AI, a helpful, unbiased, and friendly election companion assistant. Your goal is to help citizens understand the election process, voter registration, deadlines, and requirements. Provide concise, step-by-step answers. Use formatting like bullet points when helpful. Avoid complicated legal jargon and NEVER show political bias."
       });
 

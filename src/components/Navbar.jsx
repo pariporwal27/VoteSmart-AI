@@ -45,7 +45,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#roadmap"
+            href="#how-it-works"
             className="px-5 py-2.5 rounded-full bg-[var(--primary)] text-white text-sm font-semibold hover:bg-[var(--primary-light)] transition-colors shadow-sm"
           >
             Get Started
@@ -80,7 +80,7 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="#roadmap"
+              href="#how-it-works"
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 text-center px-5 py-3 rounded-lg bg-[var(--primary)] text-white text-base font-semibold"
             >

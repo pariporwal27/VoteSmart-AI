@@ -115,7 +115,7 @@ const PersonalizedRoadmap = () => {
                             {item.done ? <CheckCircle2 className="text-green-500" size={20} /> : <Circle className="text-slate-400" size={20} />}
                           </div>
                           <div>
-                            <h4 className={`font-semibold text-lg ${item.done ? 'text-slate-500 line-through dark:text-slate-500' : 'text-slate-900 dark:text-white'}`}>
+                            <h4 className={`font-semibold text-lg ${item.done ? 'text-green-700 dark:text-green-400' : 'text-slate-900 dark:text-white'}`}>
                               {item.title}
                             </h4>
                             <p className={`text-sm mt-1 ${item.done ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-slate-400'}`}>

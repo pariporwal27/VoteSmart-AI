@@ -2,7 +2,10 @@
 
 An intelligent, AI-powered election guidance platform designed to simplify complex election procedures, deadlines, and requirements for citizens. Built for a seamless and responsive hackathon experience.
 
-## 🎯 Chosen Vertical
+## � Live Demo
+**Visit the deployed app:** https://vote-smart-ai-seven.vercel.app
+
+## �🎯 Chosen Vertical
 **Civic Technology & AI Assistance**
 Our chosen vertical focuses on empowering citizens with accessible, unbiased, and personalized election information using modern web architecture and generative AI.
 

@@ -55,7 +55,7 @@ const PersonalizedRoadmap = ({ t }) => {
               >
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.age}</label>
-                  <input required type="number" min="17" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder={t.roadmap.form.cityPlaceholder} value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                  <input required type="number" min="17" className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-[var(--primary)] outline-none transition-all dark:text-white" placeholder="e.g. 18" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t.roadmap.form.status}</label>

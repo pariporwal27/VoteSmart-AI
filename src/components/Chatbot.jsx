@@ -79,7 +79,7 @@ const Chatbot = ({ t, language }) => {
       console.error("AI Error:", error);
       setMessages(prev => [...prev, { 
         id: Date.now() + 1, 
-        text: "I'm sorry, I encountered an error connecting to the AI brain. Please make sure your API key is valid and you have an active internet connection.", 
+        text: t.chatbot.errorMessage,
         sender: 'ai' 
       }]);
     } finally {
@@ -111,9 +111,9 @@ const Chatbot = ({ t, language }) => {
               <Bot size={24} />
             </div>
             <div>
-              <h3 className="font-semibold text-lg leading-tight">VoteSmart Assistant</h3>
+              <h3 className="font-semibold text-lg leading-tight">{t.chatbot.assistantName}</h3>
               <p className="text-blue-200 text-xs flex items-center gap-1">
-                <Sparkles size={10} /> Powered by Gemini AI
+                <Sparkles size={10} /> {t.chatbot.poweredBy}
               </p>
             </div>
           </div>
